@@ -51,7 +51,7 @@ def main():
 
 			
 def load_data(type_):
-	df = pd.read_csv('survey_data.csv')
+	df = pd.read_csv('/mydrive/MyDrive/pruebas/survey_data.csv')
 
 	if type_=='PCR':
 		df = df[df['type']=='pcr'].reset_index(drop=True)
