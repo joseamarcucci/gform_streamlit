@@ -51,7 +51,7 @@ def main():
 
 			
 def load_data(type_):
-	df = pd.read_csv('/mydrive/MyDrive/pruebas/survey_data.csv')
+	df = pd.read_csv('https://drive.google.com/uc?export=download&id=1b_LE-wYQwkA5xrN7CFz4Ag9tT8Z7_bYT')
 
 	if type_=='PCR':
 		df = df[df['type']=='pcr'].reset_index(drop=True)
