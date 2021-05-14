@@ -82,6 +82,8 @@ def convert_column_names(x):
 		return x
 
 
-if __name__ == '__main__':
-	print('Scraping Form Data')
-	main(spreadsheets)	
+while True:  
+    if __name__ == '__main__':
+	     print('Scraping Form Data')
+	     main(spreadsheets)
+time.sleep(15)	
