@@ -64,7 +64,8 @@ def main(spreadsheets):
 
 	df = df.sort_values(by=['date']).reset_index(drop=True)
 
-	df.to_csv('survey_data.csv',index=False)
+	#df.to_csv('survey_data.csv',index=False)
+	df.to_csv(r'/mydrive/MyDrive/pruebas/survey_data.csv',index=False)
 
 
 def convert_column_names(x):
