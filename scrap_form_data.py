@@ -2,11 +2,32 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import time
-
+from __future__ import print_function
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('forms-313619-4a1a0b940a6b.json', scope) #Change to your downloaded JSON file name 
 client = gspread.authorize(creds)
+service = build('drive', 'v3', credentials=creds)
 
+    # Call the Drive v3 API
+results = service.files().list(q="mimeType='text/csv'",
+    pageSize=100, fields="nextPageToken, files(id, name)").execute()
+
+items = results.get('files', [])
+#print(items[0]['name'])
+#df=pd.read_csv(items[0]['name'])
+
+if not items:
+    print('No files found.')
+else:
+    print('Files:')
+    for item in items:
+        print(u'{0} ({1})'.format(item['name'], item['id']))
+#Change to your Google Sheets Name
 #Change to your Google Sheets Name
 spreadsheets = ['dummy_data_rapid_test','dummy_data_pcr_test']
 
@@ -65,7 +86,7 @@ def main(spreadsheets):
 	df = df.sort_values(by=['date']).reset_index(drop=True)
 
 	#df.to_csv('survey_data.csv',index=False)
-	df.to_csv(r'/mydrive/MyDrive/pruebas/survey_data.csv',index=False)
+	df.to_csv(items[0]['name'],index=False)
 
 
 def convert_column_names(x):
